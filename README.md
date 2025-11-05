@@ -2,19 +2,29 @@
 
 A complete starter template for PowerSchool plugin development with integrated Steel Alloy live server for real-time file synchronization.
 
-## 🚀 Quick Start
+## Two Ways to Get Started
 
-### Step 1: Use This Template
+### Just Want the Files? (Recommended - No Git)
+**Perfect for simple projects or if you'll set up Git later:**
 
-1. Click **"Use this template"** button on GitHub
-2. Create a new repository with your plugin name
-3. Clone your new repository locally:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_PLUGIN_NAME.git
-   cd YOUR_PLUGIN_NAME
-   ```
+1. **[📦 Download ZIP](https://github.com/jsandoval1/powerschool-plugin-template/archive/refs/heads/main.zip)**
+2. Extract to your desired folder  
+3. Start coding immediately - no Git tracking!
 
-### Step 2: Customize Your Plugin
+### Want a GitHub Repository?
+**Perfect if you want version control from the start:**
+
+1. Click **"Use this template"** button above
+2. Creates a new repo in **your** GitHub account  
+3. Clone your new repo and start developing
+
+---
+
+**Note:** Both methods give you the same files. The ZIP method is simpler and gives you complete freedom to set up version control later (or not at all if you so choose).
+
+##  Setup Instructions
+
+### Step 1: Customize Your Plugin
 
 Replace all placeholder values in these files:
 
@@ -66,13 +76,13 @@ Replace all placeholder values in these files:
 
 5. **Update home.html**: Edit `web_root/admin/[your-folder]/home.html` and replace `[PLUGIN_NAME]` with your plugin name.
 
-### Step 3: Install Dependencies
+### Step 2: Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Step 4: Generate SSL Certificates
+### Step 3: Generate SSL Certificates
 
 The Steel Alloy server requires SSL certificates for localhost:
 
@@ -83,7 +93,7 @@ MSYS_NO_PATHCONV=1 openssl req -x509 -newkey rsa:4096 -keyout localhost.key -out
 
 This will generate the localhost.key and localhost.crt files in the root of your project folder.
 
-### Step 5: Trust the SSL Certificates
+### Step 4: Trust the SSL Certificates
 
 **Windows users:**
 1. Open File Explorer and navigate to your project folder
@@ -94,7 +104,7 @@ This will generate the localhost.key and localhost.crt files in the root of your
 
 
 
-### Step 6: Start Development Server
+### Step 5: Start Development Server
 
 ```bash
 npm start
@@ -201,10 +211,5 @@ npm run zip        # Bump version + create distribution zip, gets thrown into th
 - Check all placeholder values are replaced
 - Ensure zip file contains proper directory structure
 
-## 🤝 Contributing
 
-Found an issue or have an improvement? Please open an issue or submit a pull request!
 
-## 📄 License
-
-This template is open source. Use it to build amazing PowerSchool plugins! 🚀
