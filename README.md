@@ -72,13 +72,29 @@ Replace all placeholder values in these files:
 npm install
 ```
 
-### Step 4: Trust the SSL Certificates
+### Step 4: Generate SSL Certificates
 
-**Windows users**: Go to File Explorer and Right-click `localhost.crt` → Install Certificate → Trusted Root Certification Authorities
+The Steel Alloy server requires SSL certificates for localhost:
 
-**Mac users**: Go to System Preferences → Security & Privacy → General → Click "Manage Certificates" → Select "Trust" → Select "Always Trust"
+**Windows users (Git Bash/WSL):**
+```bash
+MSYS_NO_PATHCONV=1 openssl req -x509 -newkey rsa:4096 -keyout localhost.key -out localhost.crt -days 365 -nodes -subj "/CN=localhost"
+```
 
-### Step 5: Start Development Server
+This will generate the localhost.key and localhost.crt files in the root of your project folder.
+
+### Step 5: Trust the SSL Certificates
+
+**Windows users:**
+1. Open File Explorer and navigate to your project folder
+2. Right-click `localhost.crt` → **Install Certificate**
+3. Select **Local Machine** → Next
+4. Select **Place all certificates in the following store** → Browse
+5. Select **Trusted Root Certification Authorities** → OK → Next → Finish
+
+
+
+### Step 6: Start Development Server
 
 ```bash
 npm start
@@ -171,7 +187,8 @@ npm run zip        # Bump version + create distribution zip, gets thrown into th
 ### SSL Certificate Issues
 - **Browser security warning**: Click "Advanced" → "Proceed to localhost"
 - **Steel Alloy connection failed**: Ensure certificate is trusted in system keychain
-- **Certificate expired**: Regenerate with the OpenSSL command above
+- **Certificate generation failed on Windows**: Use `MSYS_NO_PATHCONV=1` prefix with the OpenSSL command
+- **Certificate expired**: Regenerate with the OpenSSL commands above
 
 ### Steel Alloy Not Detecting Changes
 - Verify server is running (`npm start`)
