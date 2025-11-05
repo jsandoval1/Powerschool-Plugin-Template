@@ -1,0 +1,14 @@
+{
+    "pages": [
+        {
+            "htmlID": "navFree[UNIQUE_ID]",
+            "title": "[LINK_TEXT]",
+            "pageURL": "/admin/[PLUGIN_FOLDER]/home.html",
+            "version": "[PLUGIN_VERSION]",
+            "contextType": "main",
+            "sortOrder": 900,
+            "parentHTMLID": "navSystemManagementCustomizations",
+            "districtLevelContext": 0
+        }
+    ]
+}

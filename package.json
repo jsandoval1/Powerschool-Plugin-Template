@@ -1,0 +1,21 @@
+{
+  "name": "powerschool-plugin-template",
+  "version": "1.0.0",
+  "description": "PowerSchool Plugin Development Template with Steel Alloy Live Server",
+  "main": "sa_server.js",
+  "scripts": {
+    "start": "node sa_server.js web_root 8000",
+    "dev": "node sa_server.js web_root 8000",
+    "zip": "node scripts/zip-plugin.js"
+  },
+  "keywords": ["powerschool", "plugin", "template"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^3.5.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "archiver": "^6.0.1"
+  }
+}

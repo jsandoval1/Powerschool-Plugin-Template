@@ -1,0 +1,18 @@
+<queries>
+	<!-- Add your PowerQueries here -->
+	<!-- Example:
+	<query name="com.yourorg.yourplugin.queryName" flattened="true">
+		<summary>Query Summary</summary>
+		<description>Query Description</description>
+		<columns>
+			<column column="table.column" description="Column Description">alias</column>
+		</columns>
+		<sql>
+			<![CDATA[
+				SELECT table.column AS alias
+				FROM table
+			]]>
+		</sql>
+	</query>
+	-->
+</queries>

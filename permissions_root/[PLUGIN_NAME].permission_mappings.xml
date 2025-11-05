@@ -1,0 +1,8 @@
+<permission_mappings>
+	<!-- Add permission mappings here -->
+	<!-- Example:
+	<permission name='/admin/[PLUGIN_FOLDER]/home.html'>
+		<implies>/ws/schema/query/com.yourorg.yourplugin.queryName</implies>
+	</permission>
+	-->
+</permission_mappings>
