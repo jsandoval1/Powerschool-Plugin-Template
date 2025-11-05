@@ -7,8 +7,8 @@ A complete starter template for PowerSchool plugin development with integrated S
 ### Just Want the Files? (Recommended - No Git)
 **Perfect for simple projects or if you'll set up Git later:**
 
-1. **[📦 Download ZIP](https://github.com/jsandoval1/powerschool-plugin-template/archive/refs/heads/main.zip)**
-2. Extract to your desired folder  
+1. **Click the green "Code" button above** → **"Download ZIP"**
+2. Extract the ZIP file to your desired folder
 3. Start coding immediately - no Git tracking!
 
 ### Want a GitHub Repository?
