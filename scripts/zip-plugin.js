@@ -14,10 +14,33 @@ function incrementPatchVersion(version) {
 }
 
 function updateVersion(newVersion) {
-  // Update plugin.xml
+  // Update plugin.xml - but preserve XML declaration version
   let pluginXml = fs.readFileSync('plugin.xml', 'utf8');
-  pluginXml = pluginXml.replace(/version="[^"]+"/, `version="${newVersion}"`);
+  
+  // Split at the <plugin tag to separate XML declaration from plugin element
+  const [xmlDeclaration, ...pluginParts] = pluginXml.split('<plugin');
+  
+  // Update version ONLY in the plugin part (not XML declaration)
+  let pluginPart = '<plugin' + pluginParts.join('<plugin');
+  pluginPart = pluginPart.replace(/version="[^"]+"/, `version="${newVersion}"`);
+  
+  // Rejoin without touching the XML declaration
+  pluginXml = xmlDeclaration + pluginPart;
   fs.writeFileSync('plugin.xml', pluginXml);
+  
+  // Update navigation JSON if it exists
+  const pageCatalogPath = 'web_root/pagecataloging';
+  if (fs.existsSync(pageCatalogPath)) {
+    const navFiles = fs.readdirSync(pageCatalogPath).filter(f => f.endsWith('.json'));
+    navFiles.forEach(file => {
+      const navPath = path.join(pageCatalogPath, file);
+      console.log(`Updating version in ${file}...`);
+      let navJson = fs.readFileSync(navPath, 'utf8');
+      navJson = navJson.replace(/"version":\s*"[^"]+"/, `"version": "${newVersion}"`);
+      fs.writeFileSync(navPath, navJson);
+    });
+  }
+}
   
   // Update navigation JSON if it exists
   const pageCatalogPath = 'web_root/pagecataloging';
@@ -31,23 +54,26 @@ function updateVersion(newVersion) {
       fs.writeFileSync(navPath, navJson);
     });
   }
-}
 
-function zipPlugin() {
-  // Read current plugin info
-  const pluginXml = fs.readFileSync('plugin.xml', 'utf8');
-  const nameMatch = pluginXml.match(/name="([^"]+)"/);
-  const versionMatch = pluginXml.match(/version="([^"]+)"/);
-  
-  const pluginName = nameMatch ? nameMatch[1] : 'plugin';
-  const currentVersion = versionMatch ? versionMatch[1] : '1.0.0';
-  
-  // Increment patch version
-  const newVersion = incrementPatchVersion(currentVersion);
-  updateVersion(newVersion);
-  
-  console.log(`Plugin: ${pluginName}`);
-  console.log(`Version: ${currentVersion} → ${newVersion}`);
+  function zipPlugin() {
+    // Read current plugin info
+    const pluginXml = fs.readFileSync('plugin.xml', 'utf8');
+    const nameMatch = pluginXml.match(/name="([^"]+)"/);
+    
+    // Extract version ONLY from <plugin> tag, not XML declaration
+    const [xmlDeclaration, ...pluginParts] = pluginXml.split('<plugin');
+    const pluginPart = '<plugin' + pluginParts.join('<plugin');
+    const versionMatch = pluginPart.match(/version="([^"]+)"/);
+    
+    const pluginName = nameMatch ? nameMatch[1] : 'plugin';
+    const currentVersion = versionMatch ? versionMatch[1] : '1.0.0';
+    
+    // Increment patch version
+    const newVersion = incrementPatchVersion(currentVersion);
+    updateVersion(newVersion);
+    
+    console.log(`Plugin: ${pluginName}`);
+    console.log(`Version: ${currentVersion} → ${newVersion}`);
   
   // Create iterations directory if it doesn't exist
   const iterationsDir = 'iterations';
